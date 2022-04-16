@@ -4,8 +4,8 @@
 #include <dht_nonblocking.h>
 #define DHT_SENSOR_TYPE DHT_TYPE_11
 #define BLUE 3 
-#define GREEN 5 
-#define RED 6
+#define GREEN 9 
+#define RED 5
 
 static const int DHT_SENSOR_PIN = 2;
 DHT_nonblocking dht_sensor( DHT_SENSOR_PIN, DHT_SENSOR_TYPE );
@@ -22,8 +22,8 @@ void setup( )
   pinMode(GREEN, OUTPUT);
   pinMode(BLUE, OUTPUT);
   digitalWrite(RED, HIGH);
-  digitalWrite(GREEN, LOW);
-  digitalWrite(BLUE, LOW);
+  digitalWrite(GREEN, HIGH);
+  digitalWrite(BLUE, HIGH);
   Serial.begin( 9600);
 }
 
@@ -70,34 +70,36 @@ void setColor( float humidity ){
   int humidityValue = (int)humidity;
   
   if(humidityValue >= 60){ //INDIGO
-    redValue = 67; 
+    redValue = 167; 
     greenValue = 22;
     blueValue = 201;    
   }else if(humidityValue >= 50 < 60){ //blue
     redValue = 22; 
     greenValue = 112;
-    blueValue = 201;
-  }else if(humidityValue >= 40 < 50){ //green
-    redValue = 22; 
-    greenValue = 201;
-    blueValue = 64;
-  }else if(humidityValue >= 30 < 40){ //yellow
+    blueValue = 251;
+  }
+//  else if(humidityValue >= 40 < 50){ //green
+//    redValue = 12; 
+//    greenValue = 255;
+//    blueValue = 0;
+//  }
+//  else if(humidityValue >= 30 < 40){ //yellow
+  else if(humidityValue < 50){
     redValue = 247;
     greenValue = 232;
-    blueValue = 17;
+    blueValue = 20;
   }
   
-  Serial.print( "RED value = " );
-  Serial.print( redValue, 1 );
-  Serial.print( " , greenValue = " );
-  Serial.print( greenValue, 1 );
-  Serial.println( " , blueValue = " );
-  Serial.print( blueValue, 1 );
-  Serial.println( " , humidityValue = " );
-  Serial.print( humidityValue, 1 );
+//  Serial.print( "RED value = " );
+//  Serial.print( redValue, 1 );
+//  Serial.print( " , greenValue = " );
+//  Serial.print( greenValue, 1 );
+//  Serial.println( " , blueValue = " );
+//  Serial.print( blueValue, 1 );
+//  Serial.println( " , humidityValue = " );
+//  Serial.print( humidityValue, 1 );
     
   analogWrite(RED, redValue);
   analogWrite(BLUE, blueValue);
   analogWrite(GREEN, greenValue);
-  delay(10);
 }
