@@ -69,6 +69,7 @@ void loop( ){
 void setColor( float humidity ){
   int humidityValue = (int)humidity;
   
+  digitalWrite(BLUE, HIGH);
   if(humidityValue >= 60){ //INDIGO
     redValue = 167; 
     greenValue = 22;
@@ -88,6 +89,7 @@ void setColor( float humidity ){
     redValue = 247;
     greenValue = 232;
     blueValue = 20;
+      digitalWrite(BLUE, LOW);
   }
   
 //  Serial.print( "RED value = " );
@@ -98,8 +100,9 @@ void setColor( float humidity ){
 //  Serial.print( blueValue, 1 );
 //  Serial.println( " , humidityValue = " );
 //  Serial.print( humidityValue, 1 );
-    
+
   analogWrite(RED, redValue);
   analogWrite(BLUE, blueValue);
   analogWrite(GREEN, greenValue);
+  //digitalWrite(BLUE, LOW);
 }
